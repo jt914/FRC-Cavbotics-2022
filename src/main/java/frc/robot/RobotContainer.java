@@ -33,12 +33,16 @@ public class RobotContainer {
   public static OuterIndex outerIndex;
   public static Climber climber;
   public static Hood hood;
+  public static SwerveInput swerveInput;
   public static Limelight limelight;
   public static SwerveDrive swerveDrive;
   public static XboxController controller;
   public static XboxController swerveController;
   public static SwerveCommand swerveCommand;
   public static int status;
+  public static AimCalculator aimCalculator;
+  public static Gyro gyro;
+
   // The robot's subsystems and commands are defined here...
 
 
@@ -51,12 +55,16 @@ public class RobotContainer {
     shooter = new Shooter();
     innerIndex = new InnerIndex();
     outerIndex = new OuterIndex();
+    swerveInput = new SwerveInput();
     climber = new Climber();
+    gyro = new Gyro(90);
     hood = new Hood();
     limelight = new Limelight();
     swerveDrive = new SwerveDrive(0.2923);
     intake.retract();
     hood.hoodReset();
+    aimCalculator = new AimCalculator();
+
     
     configureButtonBindings();
   }

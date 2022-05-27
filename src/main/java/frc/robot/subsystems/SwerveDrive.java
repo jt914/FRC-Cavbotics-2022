@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -23,8 +25,11 @@ public class SwerveDrive extends SubsystemBase{
   public SwerveModule m_backRightLocation;
   private final double MAX_SPEED;
   private final double MAX_RADIANS;
-  public AHRS gyro;
-  
+  public Gyro gyro;
+  private ChassisSpeeds drivetrainSpeeds;
+  private Pose2d drivePose;
+
+
 
 
   public SwerveDrive(double distanceFromOrigin) {
@@ -34,6 +39,8 @@ public class SwerveDrive extends SubsystemBase{
     Translation2d frontLeftLocation = new Translation2d(-distanceFromOrigin, distanceFromOrigin);
     Translation2d backLeftLocation = new Translation2d(-distanceFromOrigin, -distanceFromOrigin);
     Translation2d backRightLocation = new Translation2d(distanceFromOrigin, -distanceFromOrigin);
+    drivePose = new Pose2d(0.0, 0.0, Rotation2d.fromDegrees(0));
+
 
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
@@ -57,7 +64,7 @@ public class SwerveDrive extends SubsystemBase{
     m_backRightLocation.reset();
 
     try {
-      gyro = new AHRS(SPI.Port.kMXP); 
+      gyro = RobotContainer.gyro;
       gyro.reset();
     } catch (RuntimeException ex ) {
         System.out.println("--------------");
@@ -91,8 +98,8 @@ public class SwerveDrive extends SubsystemBase{
     // m_frontLeftLocation.setModule(moduleState[1].angle, moduleState[1].speedMetersPerSecond);
     // m_backLeftLocation.setModule(moduleState[2].angle, moduleState[2].speedMetersPerSecond);
     // m_backRightLocation.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
+    drivetrainSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(translateX, translateY, yaw, Rotation2d.fromDegrees(-gyro.getTotalAngleDegrees()));
 
-    
 
   }
 
@@ -125,4 +132,23 @@ public class SwerveDrive extends SubsystemBase{
     m_backLeftLocation.setPID(p, i, d);
     m_backRightLocation.setPID(p, i, d);
   }
+  
+  public double chassisXVelocity() {
+    return drivetrainSpeeds.vxMetersPerSecond;
+  }
+
+  public double chassisYVelocity() {
+    return drivetrainSpeeds.vyMetersPerSecond;
+  }
+
+  public double getYPose() {
+    double yPose = drivePose.getY(); 
+    return yPose;
+  }
+
+  public double getXPose() {
+    double xPose = drivePose.getX();
+    return xPose;
+  }
 }
+
