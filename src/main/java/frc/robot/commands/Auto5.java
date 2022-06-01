@@ -119,6 +119,7 @@ public class Auto5 extends CommandBase {
                     swerveDrive.updatePeriodic(0, 0, 0.15);
                 } else {
                     swerveDrive.stopAll();
+                    swerveDrive.resetDrive();
                     step = 5;
                 }
                 System.out.println("step " + step + " done");
@@ -136,6 +137,14 @@ public class Auto5 extends CommandBase {
                 }
                 System.out.println("step " + step + " done");
                 break;
+
+            // limelight target get
+            // translate y reverse until reaches {x} distance
+            // do a 180
+            // wait for certain time for balls to be fed
+            // turn 180
+            // drive forward {y} distance
+            // shoot
 
         }
 
