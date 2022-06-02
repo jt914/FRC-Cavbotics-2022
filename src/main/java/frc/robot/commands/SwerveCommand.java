@@ -38,21 +38,26 @@ public class SwerveCommand extends CommandBase {
   public void execute() {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(true);
 
-    p = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("P").getNumber(0.004);
-    i = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("I").getNumber(0);
-    d = (double)NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
-   
-      if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1)) >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
-        swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1), -remote.getRawAxis(2));
-      } 
-      else {
-        swerveDrive.stopAll();
-      }
+    p = (double) NetworkTableInstance.getDefault().getTable("/datatable").getEntry("P").getNumber(0.004);
+    i = (double) NetworkTableInstance.getDefault().getTable("/datatable").getEntry("I").getNumber(0);
+    d = (double) NetworkTableInstance.getDefault().getTable("/datatable").getEntry("D").getNumber(0.00001);
+
+    // if (Math.abs(remote.getRawAxis(0)) >= 0.1 || Math.abs(remote.getRawAxis(1))
+    // >= 0.1 || Math.abs(remote.getRawAxis(2)) >= 0.1){
+    // swerveDrive.updatePeriodic(remote.getRawAxis(0), remote.getRawAxis(1),
+    // -remote.getRawAxis(2));
+    // }
+    if (Math.abs(remote.getLeftX()) >= 0.1 || Math.abs(remote.getLeftY()) >= 0.1
+        || Math.abs(remote.getRightX()) >= 0.1) {
+      swerveDrive.updatePeriodic(remote.getLeftX(), remote.getLeftY(), remote.getRightX());
+    } else {
+      swerveDrive.stopAll();
     }
+  }
 
   @Override
   public void end(boolean interrupted) {
-    //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    // NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
     swerveDrive.stopAll();
   }

@@ -44,95 +44,93 @@ public class AutoAimCommand extends CommandBase {
 
   @Override
   public void execute() {
-    //swerveDrive.setPID(p, i, d);
-      double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
-      //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
-      System.out.println("Aligning left and right");
-      double startTime = 0;
-      double turnStartTime = 0;
-      if (mode == 0){
-        if (light.hasTarget() == 1){
-          double dist = 0;
-          if(light.getXDistance() <= 9)
-          {
-              System.out.println("Short Distance");
-              dist = 1;
-              shooter.set(3.45);
-              startTime = System.currentTimeMillis();
-          }
-          else if (light.getXDistance() <= 12)
-          {
-              System.out.println("Medium Distance");
-              SmartDashboard.putNumber("Distance", 2);
-              dist = 2;
-              shooter.set(3.71);
-              startTime = System.currentTimeMillis();
-          }
-          else {
-              System.out.println("Long Distance");
-              dist = 3;
-              shooter.set(4.15);
-              startTime = System.currentTimeMillis();
-          }
-          SmartDashboard.putNumber("distance", dist);
-          System.out.println("Found target");
-          double offset = light.getXOffset();
-          turnStartTime = System.currentTimeMillis();
-          while (Math.abs(offset) > 2.5){
-            if (offset < 0){
-              swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
-            } else{
-              swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
-            }
-            offset = light.getXOffset();
-          }
-          swerveDrive.stopAll();
-          System.out.println("Finished turning");
-          hood.adjustAngle(light.getXDistance());
-          System.out.println("Setting Hood to : " + light.getXDistance());
-        } else{
-          System.out.println("Manual, can't find target");
-          shooter.set(4);
-          hood.adjustAngle(15);
+    // swerveDrive.setPID(p, i, d);
+    double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
+    // NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
+    System.out.println("Aligning left and right");
+    double startTime = 0;
+    double turnStartTime = 0;
+    if (mode == 0) {
+      if (light.hasTarget() == 1) {
+        double dist = 0;
+        if (light.getXDistance() <= 9) {
+          System.out.println("Short Distance");
+          dist = 1;
+          shooter.set(3.45);
           startTime = System.currentTimeMillis();
-          turnStartTime = System.currentTimeMillis();
-
+        } else if (light.getXDistance() <= 12) {
+          System.out.println("Medium Distance");
+          SmartDashboard.putNumber("Distance", 2);
+          dist = 2;
+          shooter.set(3.71);
+          startTime = System.currentTimeMillis();
+        } else {
+          System.out.println("Long Distance");
+          dist = 3;
+          shooter.set(4.15);
+          startTime = System.currentTimeMillis();
         }
-      } else{
-        shooter.set(4);
+        SmartDashboard.putNumber("distance", dist);
+        System.out.println("Found target");
+        double offset = light.getXOffset();
+        turnStartTime = System.currentTimeMillis();
+        while (Math.abs(offset) > 2.5) {
+          if (offset < 0) {
+            swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
+          } else {
+            swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
+          }
+          offset = light.getXOffset();
+        }
+        swerveDrive.stopAll();
+        System.out.println("Finished turning");
+        hood.adjustAngle(light.getXDistance());
+        System.out.println("Setting Hood to : " + light.getXDistance());
+      } else {
+        System.out.println("Manual, can't find target");
+        shooter.set(3.5);
         hood.adjustAngle(15);
         startTime = System.currentTimeMillis();
         turnStartTime = System.currentTimeMillis();
 
       }
-      //finished starting up the flywheel and autoaiming left and right and setting hood angle
-      //wait for flywheel to ramp up
-      System.out.println("Current Time waiting: " + System.currentTimeMillis());
-      while (Math.abs(startTime - System.currentTimeMillis()) < 1000 && Math.abs(turnStartTime - System.currentTimeMillis()) < 1000){
-        continue;
-      }
-      System.out.println("Finished first waiting: " + System.currentTimeMillis());
+    } else {
+      shooter.set(3.5);
+      hood.adjustAngle(15);
+      startTime = System.currentTimeMillis();
+      turnStartTime = System.currentTimeMillis();
 
-      double midStart = System  .currentTimeMillis();
-      System.out.println("loop 2");
-      inner.spin();
-      outer.spin();
+    }
+    // finished starting up the flywheel and autoaiming left and right and setting
+    // hood angle
+    // wait for flywheel to ramp up
+    System.out.println("Current Time waiting: " + System.currentTimeMillis());
+    while (Math.abs(startTime - System.currentTimeMillis()) < 1000
+        && Math.abs(turnStartTime - System.currentTimeMillis()) < 1000) {
+      continue;
+    }
+    System.out.println("Finished first waiting: " + System.currentTimeMillis());
 
-      while (Math.abs(midStart - System.currentTimeMillis()) < 1500){
-        continue;
-      }
-      System.out.println("Finished loop 2");
-      shooter.set(0);
-      inner.stop();
-      outer.stop();
-      RobotContainer.status = 1;
+    double midStart = System.currentTimeMillis();
+    System.out.println("loop 2");
+    inner.spin();
+    outer.spin();
+
+    while (Math.abs(midStart - System.currentTimeMillis()) < 1500) {
+      continue;
+    }
+    System.out.println("Finished loop 2");
+    shooter.set(0);
+    inner.stop();
+    outer.stop();
+    RobotContainer.status = 1;
   }
 
   @Override
   public void end(boolean interrupted) {
-    //NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
+    // NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(1);
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("SwerveCommand").setBoolean(false);
-    //swerveDrive.stopAll();
+    // swerveDrive.stopAll();
     shooter.set(0);
     inner.stop();
     outer.stop();
@@ -141,8 +139,8 @@ public class AutoAimCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     if (RobotContainer.status == 1) {
-        RobotContainer.status = 0;
-        return true;   
+      RobotContainer.status = 0;
+      return true;
     }
     return false;
   }

@@ -18,11 +18,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 
-
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -41,8 +43,9 @@ public class RobotContainer {
   public static int status;
   // The robot's subsystems and commands are defined here...
 
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
     status = 0;
     controller = new XboxController(0);
@@ -57,45 +60,52 @@ public class RobotContainer {
     swerveDrive = new SwerveDrive(0.2923);
     intake.retract();
     hood.hoodReset();
-    
+
     configureButtonBindings();
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-// // Y button shoot
-//new JoystickButton(controller, XboxController.Button.kY.value).toggleWhenPressed(new ShootSequenceCommand());
-// X button intake
-//new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
-// //Right stick hood set
-new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new AutoAimCommand());
-//b button intake
-new JoystickButton(swerveController, XboxController.Button.kB.value).toggleWhenPressed(new IntakeCommand());
- //Back button kick out ball
-new JoystickButton(swerveController, XboxController.Button.kY.value).whileHeld(new KickOutBallsCommand());
-// // A button outer intake 
-//new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
-//new JoystickButton(controller, XboxController.Button.kRightkRightStick).toggleWhenPressed(new OuterIndexCommand());
-// //Left bumper Extend Climber
-new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new ExtendClimberCommand());
-new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new RetractClimberCommand());
-new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new LimeLightToggleCommand());
-new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new LimeLightOffCommand());
+    // // Y button shoot
+    // new JoystickButton(controller,
+    // XboxController.Button.kY.value).toggleWhenPressed(new
+    // ShootSequenceCommand());
+    // X button intake
+    // new JoystickButton(controller,
+    // XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
+    // //Right stick hood set
+    new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new AutoAimCommand());
+    // b button intake
+    new JoystickButton(swerveController, XboxController.Button.kRightBumper.value)
+        .toggleWhenPressed(new IntakeCommand());
+    // Back button kick out ball
+    new JoystickButton(swerveController, XboxController.Button.kY.value).whileHeld(new KickOutBallsCommand());
+    // // A button outer intake
+    // new JoystickButton(controller,
+    // XboxController.Button.kA.value).toggleWhenPressed(new OuterIndexCommand());
+    // new JoystickButton(controller,
+    // XboxController.Button.kRightkRightStick).toggleWhenPressed(new
+    // OuterIndexCommand());
+    // //Left bumper Extend Climber
+    new JoystickButton(controller, XboxController.Button.kRightBumper.value).whenHeld(new ExtendClimberCommand());
+    new JoystickButton(controller, XboxController.Button.kLeftBumper.value).whenHeld(new RetractClimberCommand());
+    new JoystickButton(controller, XboxController.Button.kA.value).toggleWhenPressed(new LimeLightToggleCommand());
+    new JoystickButton(controller, XboxController.Button.kX.value).toggleWhenPressed(new LimeLightOffCommand());
 
+    // left bumper decline hood
+    // new JoystickButton(controller, 3).whenActive(new DeclineHoodCommand());
+    // //right bumper raise hood
+    // new JoystickButton (controller, 2).whenActive(new RaiseHoodCommand());
 
-//left bumper decline hood
-// new JoystickButton(controller, 3).whenActive(new DeclineHoodCommand());
-// //right bumper raise hood
-// new JoystickButton (controller, 2).whenActive(new RaiseHoodCommand());
-
-//start button, start swerve
-new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
-
+    // start button, start swerve
+    new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleWhenPressed(new SwerveCommand());
 
   }
 
@@ -108,13 +118,13 @@ new JoystickButton(swerveController, XboxController.Button.kStart.value).toggleW
     // An ExampleCommand will run in autonomous
     double routine = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getDouble(1);
 
-    if(routine == 0){
+    if (routine == 0) {
       return new Auto1(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
     }
-    if(routine == 1){ 
+    if (routine == 1) {
       return new Auto2(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);
     }
     System.out.println("Do nothing");
-      return new DoNothingCommand();
+    return new DoNothingCommand();
   }
 }
