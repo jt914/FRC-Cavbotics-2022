@@ -37,8 +37,8 @@ public class SwerveDrive extends SubsystemBase{
 
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
-    MAX_SPEED = 4;
-    MAX_RADIANS = 5;
+    MAX_SPEED = 2;//4
+    MAX_RADIANS = 2;//5
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
