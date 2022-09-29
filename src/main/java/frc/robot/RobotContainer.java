@@ -81,7 +81,11 @@ public class RobotContainer {
     // new JoystickButton(controller,
     // XboxController.Button.kX.value).toggleWhenPressed(new InnerIndexCommand());
     // //Right stick hood set
-    new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new AutoAimCommand());
+    
+    
+    //*********** */ new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new AutoAimCommand());
+    new JoystickButton(controller, XboxController.Button.kB.value).whenPressed(new ShootTesting());
+    
     // b button intake
     new JoystickButton(swerveController, XboxController.Button.kRightBumper.value)
         .toggleWhenPressed(new IntakeCommand());

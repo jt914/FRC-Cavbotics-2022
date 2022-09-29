@@ -21,17 +21,18 @@ public class Intake extends SubsystemBase {
         hub.enableCompressorDigital();
         intake = new CANSparkMax(Constants.intakeId, MotorType.kBrushless);
         intake.enableVoltageCompensation(12);
-        mainSolenoid = hub.makeDoubleSolenoid(14, 15);
-    //    mainSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, Constants.mainSolenoidOne, Constants.mainSolenoidTwo);
-    //    compressor = new Compressor(PneumaticsModuleType.REVPH);
-    //    compressor.enableDigital();
+        mainSolenoid = hub.makeDoubleSolenoid(14, 15);//orig:14,15
+        // mainSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH,
+        // Constants.mainSolenoidOne, Constants.mainSolenoidTwo);
+        // compressor = new Compressor(PneumaticsModuleType.REVPH);
+        // compressor.enableDigital();
     }
 
     public void spinIntake() {
         intake.set(-0.57);
     }
 
-    public void reverseIntake(){
+    public void reverseIntake() {
         intake.set(0.40);
     }
 
@@ -41,14 +42,14 @@ public class Intake extends SubsystemBase {
 
     public void retract() {
         mainSolenoid.set(DoubleSolenoid.Value.kForward);
-        
+
     }
 
     public void stopIntake() {
         intake.setVoltage(0);
     }
 
-    public DoubleSolenoid.Value getValue(){
+    public DoubleSolenoid.Value getValue() {
         return mainSolenoid.get();
     }
 
