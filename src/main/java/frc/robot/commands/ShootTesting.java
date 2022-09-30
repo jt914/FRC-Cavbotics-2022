@@ -48,8 +48,14 @@ public class ShootTesting extends CommandBase {
     double mode = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("shooterMode").getDouble(0);
     // NetworkTableInstance.getDefault().getTable("/limelight-sam").getEntry("ledMode").setDouble(0);
 
-    shooter.set(3.5);
+    shooter.set(3);
     hood.adjustAngle(15);
+
+    double startTime = System.currentTimeMillis();
+    while (Math.abs(startTime - System.currentTimeMillis()) < 1000){
+        continue;
+    }
+
 
     double midStart = System.currentTimeMillis();
     System.out.println("loop 2");
