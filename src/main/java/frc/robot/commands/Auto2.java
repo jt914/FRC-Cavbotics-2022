@@ -132,33 +132,8 @@ public class Auto2 extends CommandBase {
                 }
             break;
 
-            case 5:
-                // outerIndex.stop();
-                intake.stopIntake();
-                // innerIndex.stop();
-                step = 9;
-            break;
-
-            //turn around again
-            case 6:
-                
-            break;
-
-            //autoaim again 
-
-            case 7:
-                
-            break;
-
-
-            //shoot again
-
-            case 8:
-
-            break;
-
             default:
-            step = 9;
+            step = 5;
             break;
         }
     }
@@ -172,8 +147,7 @@ public class Auto2 extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        //return (step >= 9);
-        return step >= 10;
+        return step >= 6;
     }
 
     
