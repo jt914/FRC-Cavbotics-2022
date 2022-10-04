@@ -73,7 +73,7 @@ public class AutoAimCommand extends CommandBase {
         SmartDashboard.putNumber("distance", dist);
         System.out.println("Found target");
         double offset = light.getXOffset();
-        SmartDashboard.putNumber("offset", offset);
+        System.out.println("offset:" + offset);
         turnStartTime = System.currentTimeMillis();
         while (Math.abs(offset) > 2.5) {
           if (offset < 0) {
