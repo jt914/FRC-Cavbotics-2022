@@ -34,8 +34,8 @@ public class IntakeCommand extends CommandBase {
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("IntakeCommand").setBoolean(true);
 
 
-    // intake.spinIntake();
-    // outer.spin();
+    intake.spinIntake();
+    outer.spin();
   }
 
   @Override
