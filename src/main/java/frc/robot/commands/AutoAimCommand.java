@@ -50,8 +50,10 @@ public class AutoAimCommand extends CommandBase {
     System.out.println("Aligning left and right");
     double startTime = 0;
     double turnStartTime = 0;
+    System.out.println(light.hasTarget());
     if (mode == 0) {
       if (light.hasTarget() == 1) {
+        System.out.println("has target");
         double dist = 0;
         if (light.getXDistance() <= 9) {
           System.out.println("Short Distance");
@@ -70,15 +72,19 @@ public class AutoAimCommand extends CommandBase {
           shooter.set(4.15);
           startTime = System.currentTimeMillis();
         }
-        SmartDashboard.putNumber("distance", dist);
-        System.out.println("Found target");
         double offset = light.getXOffset();
         turnStartTime = System.currentTimeMillis();
+        System.out.println(Math.abs(offset) + "1");
         while (Math.abs(offset) > 2.5) {
+          System.out.println(Math.abs(offset) + "2");
           if (offset < 0) {
-            swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, -0.01 * Math.sqrt(Math.abs(offset)));
+            System.out.println(Math.abs(offset)+ "3");
+
+            System.out.println("turning");
+
           } else {
-            swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, 0.01 * Math.sqrt(Math.abs(offset)));
           }
           offset = light.getXOffset();
         }

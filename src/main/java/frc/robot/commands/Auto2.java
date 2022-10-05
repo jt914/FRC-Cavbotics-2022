@@ -73,6 +73,7 @@ public class Auto2 extends CommandBase {
                     step = 1;
                     System.out.println("Drove 4 feet");
                 } else{
+                    System.out.println(Math.abs(swerveDrive.getDriveDistance()));
                     swerveDrive.updatePeriodic(-0.014, 0.4, 0);
                     
                 }
