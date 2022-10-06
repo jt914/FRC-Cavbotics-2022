@@ -73,15 +73,6 @@ public class Auto1 extends CommandBase {
                 innerIndex.stop();
                 shooter.set(0);
                 step = 9;
-                if (Math.abs(swerveDrive.getDriveDistance()) > 100 ){
-                    swerveDrive.stopAll();
-                    step = 9;
-                    System.out.println("Drove 4 feet");
-                } else{
-                    swerveDrive.updatePeriodic(-0.014, 0.4, 0);
-                    
-                }
-
             break;        
 
             default:
