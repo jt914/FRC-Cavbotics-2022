@@ -78,13 +78,13 @@ public class AutoAimCommand extends CommandBase {
         while (Math.abs(offset) > 2.5) {
           System.out.println(Math.abs(offset) + "2");
           if (offset < 0) {
-            swerveDrive.updatePeriodic(0, 0, -0.01 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
             System.out.println(Math.abs(offset)+ "3");
 
             System.out.println("turning");
 
           } else {
-            swerveDrive.updatePeriodic(0, 0, 0.01 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
           }
           offset = light.getXOffset();
         }
