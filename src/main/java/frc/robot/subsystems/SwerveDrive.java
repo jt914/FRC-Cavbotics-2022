@@ -38,7 +38,7 @@ public class SwerveDrive extends SubsystemBase{
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
     MAX_SPEED = 2;//4
-    MAX_RADIANS = 1;//5
+    MAX_RADIANS = 2;//5 //1
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
@@ -83,9 +83,10 @@ public class SwerveDrive extends SubsystemBase{
 
 
     m_frontRightLocation.setModule(optimized1.angle, optimized1.speedMetersPerSecond);
-    m_frontLeftLocation.setModule(optimized2.angle, optimized2.speedMetersPerSecond);
+    m_frontLeftLocation.setModule(optimized2.angle, 0);
     m_backLeftLocation.setModule(optimized3.angle, optimized3.speedMetersPerSecond);
-    m_backRightLocation.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
+    m_backRightLocation.setModule(optimized4.angle, 0);
+
 
     // m_frontRightLocation.setModule(moduleState[0].angle, moduleState[0].speedMetersPerSecond);
     // m_frontLeftLocation.setModule(moduleState[1].angle, moduleState[1].speedMetersPerSecond);
