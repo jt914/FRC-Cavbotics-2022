@@ -66,7 +66,7 @@ public class Auto2 extends CommandBase {
                 intake.spinIntake();
                 outerIndex.spin();
 
-                if (Math.abs(swerveDrive.getDriveDistance()) > 100 ){
+                if (Math.abs(swerveDrive.getDriveDistance()) > 40 ){
                     swerveDrive.stopAll();
                     intake.retract();
                     Constants.intakeStatus = false;
@@ -93,9 +93,9 @@ public class Auto2 extends CommandBase {
             break;
 
             case 2:   
-                hood.setHoodAngle(33);
+                hood.setHoodAngle(50);
                 shooter.set(3.67);
-                if(shooter.getRPM() > 1800) {
+                if(shooter.getRPM() > 600) {
                     startTime = System.currentTimeMillis();
                     outerIndex.spin();
                     innerIndex.spin();
