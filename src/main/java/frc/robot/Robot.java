@@ -167,6 +167,7 @@ public class Robot extends TimedRobot {
     swerveDrive = RobotContainer.swerveDrive;
     remote = RobotContainer.swerveController;
     NetworkTableInstance.getDefault().getTable("/datatable").getEntry("distance").setDouble(light.getXDistance());
+    swerveDrive.MAX_RADIANS = 2;
 
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to

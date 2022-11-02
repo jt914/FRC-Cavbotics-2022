@@ -62,9 +62,8 @@ public class AutoAimCommand extends CommandBase {
           startTime = System.currentTimeMillis();
         } else if (light.getXDistance() <= 12) {
           System.out.println("Medium Distance");
-          SmartDashboard.putNumber("Distance", 2);
           dist = 2;
-          shooter.set(3.71);
+          shooter.set(3.65);//3.71
           startTime = System.currentTimeMillis();
         } else {
           System.out.println("Long Distance");
@@ -78,13 +77,13 @@ public class AutoAimCommand extends CommandBase {
         while (Math.abs(offset) > 2.5) {
           System.out.println(Math.abs(offset) + "2");
           if (offset < 0) {
-            swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, -0.060 * Math.sqrt(Math.abs(offset)));
             System.out.println(Math.abs(offset)+ "3");
 
             System.out.println("turning");
 
           } else {
-            swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
+            swerveDrive.updatePeriodic(0, 0, 0.060 * Math.sqrt(Math.abs(offset)));
           }
           offset = light.getXOffset();
         }
@@ -92,6 +91,7 @@ public class AutoAimCommand extends CommandBase {
         System.out.println("Finished turning");
         hood.adjustAngle(light.getXDistance());
         System.out.println("Setting Hood to : " + light.getXDistance());
+        System.out.println(Math.abs(offset));
       } else {
         System.out.println("Manual, can't find target");
         shooter.set(3.5);

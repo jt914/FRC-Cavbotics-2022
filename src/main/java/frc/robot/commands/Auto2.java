@@ -94,8 +94,9 @@ public class Auto2 extends CommandBase {
 
             case 2:   
                 hood.setHoodAngle(50);
-                shooter.set(3.67);
-                if(shooter.getRPM() > 600) {
+                System.out.println(hood.getHoodAngle());
+                shooter.set(3.46); //3.52
+                if(shooter.getRPM() > 900) { //1000
                     startTime = System.currentTimeMillis();
                     outerIndex.spin();
                     innerIndex.spin();
