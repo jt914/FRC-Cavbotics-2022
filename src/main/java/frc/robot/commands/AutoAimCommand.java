@@ -63,7 +63,7 @@ public class AutoAimCommand extends CommandBase {
         } else if (light.getXDistance() <= 12) {
           System.out.println("Medium Distance");
           dist = 2;
-          shooter.set(3.65);//3.71
+          shooter.set(3.3);//3.71 //3.65
           startTime = System.currentTimeMillis();
         } else {
           System.out.println("Long Distance");
