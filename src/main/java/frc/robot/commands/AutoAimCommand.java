@@ -52,47 +52,49 @@ public class AutoAimCommand extends CommandBase {
     double turnStartTime = 0;
     System.out.println(light.hasTarget());
     if (mode == 0) {
-      // if (light.hasTarget() == 1) {
-      //   System.out.println("has target");
-      //   double dist = 0;
-      //   if (light.getXDistance() <= 9) {
-      //     System.out.println("Short Distance");
-      //     dist = 1;
-      //     shooter.set(3.45);
-      //     startTime = System.currentTimeMillis();
-      //   } else if (light.getXDistance() <= 12) {
-      //     System.out.println("Medium Distance");
-      //     SmartDashboard.putNumber("Distance", 2);
-      //     dist = 2;
-      //     shooter.set(3.71);
-      //     startTime = System.currentTimeMillis();
-      //   } else {
-      //     System.out.println("Long Distance");
-      //     dist = 3;
-      //     shooter.set(4.15);
-      //     startTime = System.currentTimeMillis();
-      //   }
-      //   double offset = light.getXOffset();
-      //   turnStartTime = System.currentTimeMillis();
-      //   System.out.println(Math.abs(offset) + "1");
-      //   while (Math.abs(offset) > 2.5) {
-      //     System.out.println(Math.abs(offset) + "2");
-      //     if (offset < 0) {
-      //       swerveDrive.updatePeriodic(0, 0, -0.030 * Math.sqrt(Math.abs(offset)));
-      //       System.out.println(Math.abs(offset)+ "3");
+      if (light.hasTarget() == 1) {
+        System.out.println("has target");
+        double dist = 0;
+        if (light.getXDistance() <= 9) {
+          System.out.println("Short Distance");
+          dist = 1;
+          shooter.set(3.45);
+          startTime = System.currentTimeMillis();
+        } else if (light.getXDistance() <= 12) {
+          System.out.println("Medium Distance");
+          dist = 2;
+          shooter.set(3.65);//3.71
+          startTime = System.currentTimeMillis();
+        } else {
+          System.out.println("Long Distance");
+          dist = 3;
+          shooter.set(4.15);
+          startTime = System.currentTimeMillis();
+        }
+        double offset = light.getXOffset();
+        turnStartTime = System.currentTimeMillis();
+        System.out.println(Math.abs(offset) + "1");
+        while (Math.abs(offset) > 2.5) {
+          System.out.println(Math.abs(offset) + "2");
+          if (offset < 0) {
+            swerveDrive.updatePeriodic(0, 0, -0.060 * Math.sqrt(Math.abs(offset)));
+            System.out.println(Math.abs(offset)+ "3");
+
 
       //       System.out.println("turning");
 
-      //     } else {
-      //       swerveDrive.updatePeriodic(0, 0, 0.030 * Math.sqrt(Math.abs(offset)));
-      //     }
-      //     offset = light.getXOffset();
-      //   }
-      //   swerveDrive.stopAll();
-      //   System.out.println("Finished turning");
-      //   hood.adjustAngle(light.getXDistance());
-      //   System.out.println("Setting Hood to : " + light.getXDistance());
-      // } else {
+          } else {
+            swerveDrive.updatePeriodic(0, 0, 0.060 * Math.sqrt(Math.abs(offset)));
+          }
+          offset = light.getXOffset();
+        }
+        swerveDrive.stopAll();
+        System.out.println("Finished turning");
+        hood.adjustAngle(light.getXDistance());
+        System.out.println("Setting Hood to : " + light.getXDistance());
+        System.out.println(Math.abs(offset));
+      } else {
+
         System.out.println("Manual, can't find target");
         shooter.set(3.5);
         hood.adjustAngle(15);

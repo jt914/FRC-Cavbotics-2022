@@ -22,7 +22,7 @@ public class SwerveDrive extends SubsystemBase{
   public SwerveModule m_backLeftLocation;
   public SwerveModule m_backRightLocation;
   private final double MAX_SPEED;
-  private final double MAX_RADIANS;
+  public double MAX_RADIANS;
   public AHRS gyro;
   
 
@@ -38,7 +38,7 @@ public class SwerveDrive extends SubsystemBase{
     kinematics = new SwerveDriveKinematics(frontRightLocation, frontLeftLocation, backLeftLocation, backRightLocation);
 
     MAX_SPEED = 2;//4
-    MAX_RADIANS = 2;//5 //1
+    MAX_RADIANS = 4;//5
 
     moduleState = new SwerveModuleState[4];
     m_frontRightLocation = new SwerveModule(1, 2,
