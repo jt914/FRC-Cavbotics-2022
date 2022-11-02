@@ -73,7 +73,9 @@ public class Auto1 extends CommandBase {
                 innerIndex.stop();
                 shooter.set(0);
                 step = 9;
-            break;        
+
+            break;
+                    
 
             default:
             step = 9;
