@@ -116,7 +116,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    double routine = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getDouble(0);
+    double routine = NetworkTableInstance.getDefault().getTable("/datatable").getEntry("routine").getDouble(1);
 
     if (routine == 0) {
       return new Auto1(limelight, hood, innerIndex, intake, outerIndex, shooter, swerveDrive);

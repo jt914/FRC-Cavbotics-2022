@@ -63,7 +63,9 @@ public class AutoAimCommand extends CommandBase {
         } else if (light.getXDistance() <= 12) {
           System.out.println("Medium Distance");
           dist = 2;
-          shooter.set(3.65);//3.71
+          shooter.set(3.3);
+          //new2 shooter.set(3.3);
+          //black shooter.set(3.3);
           startTime = System.currentTimeMillis();
         } else {
           System.out.println("Long Distance");
@@ -90,7 +92,7 @@ public class AutoAimCommand extends CommandBase {
         }
         swerveDrive.stopAll();
         System.out.println("Finished turning");
-        hood.adjustAngle(light.getXDistance());
+        hood.adjustAngle(light.getXDistance() + 10);
         System.out.println("Setting Hood to : " + light.getXDistance());
         System.out.println(Math.abs(offset));
       } else {
