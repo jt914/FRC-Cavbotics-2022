@@ -83,9 +83,10 @@ public class SwerveDrive extends SubsystemBase{
 
 
     m_frontRightLocation.setModule(optimized1.angle, optimized1.speedMetersPerSecond);
-    m_frontLeftLocation.setModule(optimized2.angle, optimized2.speedMetersPerSecond);
+    m_frontLeftLocation.setModule(optimized2.angle, 0);
     m_backLeftLocation.setModule(optimized3.angle, optimized3.speedMetersPerSecond);
-    m_backRightLocation.setModule(optimized4.angle, optimized4.speedMetersPerSecond);
+    m_backRightLocation.setModule(optimized4.angle, 0);
+
 
     // m_frontRightLocation.setModule(moduleState[0].angle, moduleState[0].speedMetersPerSecond);
     // m_frontLeftLocation.setModule(moduleState[1].angle, moduleState[1].speedMetersPerSecond);

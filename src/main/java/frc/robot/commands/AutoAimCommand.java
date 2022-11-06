@@ -82,7 +82,8 @@ public class AutoAimCommand extends CommandBase {
             swerveDrive.updatePeriodic(0, 0, -0.060 * Math.sqrt(Math.abs(offset)));
             System.out.println(Math.abs(offset)+ "3");
 
-            System.out.println("turning");
+
+      //       System.out.println("turning");
 
           } else {
             swerveDrive.updatePeriodic(0, 0, 0.060 * Math.sqrt(Math.abs(offset)));
@@ -95,13 +96,13 @@ public class AutoAimCommand extends CommandBase {
         System.out.println("Setting Hood to : " + light.getXDistance());
         System.out.println(Math.abs(offset));
       } else {
+
         System.out.println("Manual, can't find target");
         shooter.set(3.5);
         hood.adjustAngle(15);
         startTime = System.currentTimeMillis();
         turnStartTime = System.currentTimeMillis();
 
-      }
     } else {
       shooter.set(3.5);
       hood.adjustAngle(15);

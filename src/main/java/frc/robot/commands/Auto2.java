@@ -83,7 +83,7 @@ public class Auto2 extends CommandBase {
             case 1:
             //134
                 if (Math.abs(swerveDrive.getGyroAngle()) < 151 ){
-                    swerveDrive.updatePeriodic(0, 0, 0.15);
+                    swerveDrive.updatePeriodic(0, 0, 0.35);
                 } else{
                     intake.stopIntake();
                     swerveDrive.stopAll();
